@@ -18,6 +18,28 @@
 
 > المستودع مستقل بالكامل ولا يحتوي على بيانات عميل، كلمات مرور، Branding خاص، صور تجارية خاصة، أو بيانات Production.
 
+## صور المشروع
+
+الصور التالية مبنية من واجهات Blade الحالية باستخدام بيانات الـDemo العامة الموجودة داخل المشروع.
+
+### الصفحة الرئيسية
+
+<p align="center">
+  <img src="docs/screenshots/home.jpg" alt="الصفحة الرئيسية لـ Laravel Digital Menu" width="100%">
+</p>
+
+### منيو الفرع
+
+<p align="center">
+  <img src="docs/screenshots/menu.jpg" alt="منيو الفرع في Laravel Digital Menu" width="100%">
+</p>
+
+### لوحة الإدارة
+
+<p align="center">
+  <img src="docs/screenshots/admin-dashboard.jpg" alt="لوحة إدارة Laravel Digital Menu" width="100%">
+</p>
+
 ## المميزات
 
 | الجزء | المتوفر |
@@ -97,11 +119,11 @@ Restaurant
 
 ## حالة المشروع
 
-الأساس الحالي يشمل الـdomain model، لوحة الإدارة، المنيو العام ثنائي اللغة، قواعد الفروع، الاختبارات والـCI.
+**v1.0.0** هو أول إصدار مستقر للمشروع المفتوح المصدر، ويشمل الـdomain model، لوحة الإدارة، المنيو العام ثنائي اللغة، قواعد الفروع، الاختبارات، CI، وتوثيق المشروع.
 
 الخطوات القادمة تشمل رفع الصور بشكل آمن، إعدادات الـbranding، الصلاحيات، تعديل الأسعار حسب الفرع من لوحة الإدارة، وزيادة التغطية بالاختبارات.
 
-راجعي **[Roadmap](docs/ROADMAP.md)** و **[Changelog](CHANGELOG.md)** للتفاصيل.
+راجعي **[Roadmap](docs/ROADMAP.md)** و **[Changelog](CHANGELOG.md)** و **[ملاحظات إصدار v1.0.0](docs/releases/v1.0.0.md)** للتفاصيل.
 
 ## المساهمة
 
