@@ -74,7 +74,7 @@ Use concise, conventional-style messages when possible:
 ```text
 feat: add branch-specific price editor
 fix: hide inactive menu items
- test: cover disabled admin login
+test: cover disabled admin login
 docs: improve installation guide
 ```
 
