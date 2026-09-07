@@ -21,12 +21,14 @@ class AuthController extends Controller
                 Auth::logout();
 
                 return back()->withErrors(['email' => 'This account is disabled.']);
-            }$request->session()->regenerate();
+            }
+
+            $request->session()->regenerate();
 
             return redirect()->intended(route('admin.dashboard'));
         }
 
-return back()->withErrors(['email' => 'Invalid email or password.'])->onlyInput('email');
+        return back()->withErrors(['email' => 'Invalid email or password.'])->onlyInput('email');
     }
 
     public function logout(Request $request)
