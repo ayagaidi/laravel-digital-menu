@@ -34,6 +34,28 @@ It provides a practical Laravel foundation for **multiple branches**, **Arabic a
 
 The repository is intentionally independent: it contains **no client credentials, private branding, proprietary assets, or production data**.
 
+## Screenshots
+
+The screenshots below are rendered from the project's current Blade views using the public demo data shipped by the repository.
+
+### Public landing page
+
+<p align="center">
+  <img src="docs/screenshots/home.jpg" alt="Laravel Digital Menu public landing page" width="100%">
+</p>
+
+### Branch menu
+
+<p align="center">
+  <img src="docs/screenshots/menu.jpg" alt="Laravel Digital Menu branch menu" width="100%">
+</p>
+
+### Admin dashboard
+
+<p align="center">
+  <img src="docs/screenshots/admin-dashboard.jpg" alt="Laravel Digital Menu admin dashboard" width="100%">
+</p>
+
 ## Highlights
 
 | Area | Included |
@@ -131,11 +153,11 @@ For relationships, request flow, data lifecycle, and architectural notes, see **
 
 ## Project status
 
-The first stable foundation includes the domain model, admin CRUD, bilingual public flow, branch rules, automated tests, and CI.
+**v1.0.0** is the first stable open-source foundation: domain model, admin CRUD, bilingual public flow, branch rules, automated tests, CI, and public project documentation.
 
 Next priorities include validated image uploads, branding controls, authorization policies, branch-specific price editing, broader test coverage, and optional API support.
 
-See the full **[public roadmap](docs/ROADMAP.md)** and **[changelog](CHANGELOG.md)**.
+See the full **[public roadmap](docs/ROADMAP.md)**, **[changelog](CHANGELOG.md)**, and **[v1.0.0 release notes](docs/releases/v1.0.0.md)**.
 
 ## Community
 
