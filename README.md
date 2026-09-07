@@ -1,35 +1,57 @@
-# Laravel Digital Menu
+<p align="center">
+  <img src="docs/assets/hero.svg" alt="Laravel Digital Menu" width="100%">
+</p>
 
-[![Laravel Tests](https://github.com/ayagaidi/laravel-digital-menu/actions/workflows/tests.yml/badge.svg)](https://github.com/ayagaidi/laravel-digital-menu/actions/workflows/tests.yml)
+<p align="center">
+  <a href="https://github.com/ayagaidi/laravel-digital-menu/actions/workflows/tests.yml"><img alt="Laravel Quality" src="https://github.com/ayagaidi/laravel-digital-menu/actions/workflows/tests.yml/badge.svg"></a>
+  <a href="https://github.com/ayagaidi/laravel-digital-menu/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/ayagaidi/laravel-digital-menu"></a>
+  <img alt="PHP 8.2+" src="https://img.shields.io/badge/PHP-8.2%2B-777BB4?logo=php&logoColor=white">
+  <img alt="Laravel 12" src="https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white">
+  <a href="https://github.com/ayagaidi/laravel-digital-menu/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/ayagaidi/laravel-digital-menu?style=flat"></a>
+</p>
 
-An open-source **bilingual digital menu starter** for cafés and restaurants, built with Laravel 12 by **Aya Aljaidi**.
+<p align="center">
+  <strong>A bilingual, multi-branch QR menu starter for cafés and restaurants.</strong><br>
+  Laravel 12 · Arabic / English · RTL / LTR · Admin CRUD · Feature Tests · CI
+</p>
 
-> This repository is an independent open-source demo. It contains no client credentials, proprietary assets, production data, or private project branding.
+<p align="center">
+  <a href="README_AR.md">العربية</a> ·
+  <a href="docs/ARCHITECTURE.md">Architecture</a> ·
+  <a href="docs/ROADMAP.md">Roadmap</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a> ·
+  <a href="SECURITY.md">Security</a> ·
+  <a href="SUPPORT.md">Support</a>
+</p>
 
-[العربية](README_AR.md) · [Architecture](docs/ARCHITECTURE.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+---
 
-## Why this project
+## What is Laravel Digital Menu?
 
-Many cafés and restaurants need a simple QR menu that supports multiple branches, Arabic/English content, and an admin dashboard without depending on a heavy SaaS platform. This starter demonstrates how to build that cleanly in Laravel.
+Laravel Digital Menu is an open-source starter for restaurants and cafés that need a clean QR-based menu without depending on a large hosted platform.
 
-## Features
+It provides a practical Laravel foundation for **multiple branches**, **Arabic and English content**, **branch-level menu availability**, **QR entry points**, and an authenticated admin area for managing the core menu structure.
 
-- Laravel 12 / PHP 8.2+
-- Arabic + English with RTL/LTR-ready views
-- Multiple restaurant branches
-- Branch-specific menu availability
-- Optional branch price overrides at the data-model level
-- Categories and menu items
-- QR code route per branch
-- Session-based admin authentication
-- Admin CRUD for branches, categories, and menu items
-- Safe environment-based demo admin creation
-- SQLite-friendly local setup
-- PHPUnit Feature Tests
-- GitHub Actions CI
-- MIT license
+The repository is intentionally independent: it contains **no client credentials, private branding, proprietary assets, or production data**.
 
-## Domain model
+## Highlights
+
+| Area | Included |
+| --- | --- |
+| Framework | Laravel 12 / PHP 8.2+ |
+| Languages | Arabic + English |
+| Layout direction | RTL + LTR ready |
+| Branches | Multiple restaurant branches |
+| Menu structure | Categories + menu items |
+| Branch rules | Availability + price override support |
+| QR | Branch-specific QR route |
+| Admin | Authentication + CRUD workflows |
+| Database | SQLite-friendly local setup |
+| Quality | PHPUnit Feature Tests + Laravel Pint |
+| Automation | GitHub Actions CI |
+| License | MIT |
+
+## Core domain
 
 ```text
 Restaurant
@@ -41,6 +63,8 @@ Restaurant
            └── price_override
 ```
 
+The `branch_menu_item` pivot keeps branch-specific commercial rules separate from the base menu item, so the same item can be reused across locations with different availability or pricing.
+
 ## Quick start
 
 ```bash
@@ -49,21 +73,20 @@ cd laravel-digital-menu
 composer install
 cp .env.example .env
 php artisan key:generate
-```
-
-The default example uses SQLite:
-
-```bash
 touch database/database.sqlite
 php artisan migrate --seed
 php artisan serve
 ```
 
-Open `http://127.0.0.1:8000`.
+Open:
+
+```text
+http://127.0.0.1:8000
+```
 
 ### Demo admin
 
-No password is committed to the repository. Add your own local demo password to `.env`:
+A password is never committed to the repository. To create a local demo admin, set your own values in `.env`:
 
 ```dotenv
 SEED_ADMIN_NAME="Demo Admin"
@@ -77,41 +100,67 @@ Then run:
 php artisan db:seed
 ```
 
-## Tests
+## Quality gate
+
+Every push and pull request to `main` runs the project quality workflow:
 
 ```bash
 php artisan test
+vendor/bin/pint --test
 ```
 
-The initial Feature Test suite covers public rendering, locale switching, admin authentication, branch availability, and inactive-branch behavior.
+The current Feature Test suite covers:
 
-## Portfolio highlights
+- public menu rendering;
+- locale persistence;
+- admin authentication;
+- disabled admin rejection;
+- branch-specific availability;
+- inactive branch behavior.
 
-This repository demonstrates Laravel architecture, Eloquent relationships, route-model binding, authentication, bilingual UX, many-to-many pivot business rules, database migrations/seeding, automated testing, and CI/CD fundamentals.
+CI is intentionally strict: code should be both behaviorally tested and Laravel Pint compliant before merge.
 
-## Roadmap
+## Architecture
 
-- image uploads with storage validation
-- branding settings and theme customization
-- user/role management
-- branch-specific price editing in the admin UI
-- API endpoints for mobile clients
-- Docker development environment
-- richer test coverage and static analysis
+This is a server-rendered Laravel application with two primary surfaces:
 
-## Security
+1. a public bilingual digital menu;
+2. an authenticated administration area.
 
-Never commit `.env`, production database exports, customer information, API keys, SMTP passwords, or private assets. Demo credentials are supplied only through environment variables.
+For relationships, request flow, data lifecycle, and architectural notes, see **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
 
-## Contributing
+## Project status
 
-Issues and pull requests are welcome. Keep contributions focused, tested, and free of proprietary/client material.
+The first stable foundation includes the domain model, admin CRUD, bilingual public flow, branch rules, automated tests, and CI.
+
+Next priorities include validated image uploads, branding controls, authorization policies, branch-specific price editing, broader test coverage, and optional API support.
+
+See the full **[public roadmap](docs/ROADMAP.md)** and **[changelog](CHANGELOG.md)**.
+
+## Community
+
+Contributions are welcome when they keep the project focused, secure, and reusable.
+
+- Found a reproducible problem? Open a **bug report**.
+- Have an idea that fits the project scope? Open a **feature request**.
+- Want to contribute code? Read **[CONTRIBUTING.md](CONTRIBUTING.md)** first.
+- Need help using the project? See **[SUPPORT.md](SUPPORT.md)**.
+- Found a vulnerability? Follow **[SECURITY.md](SECURITY.md)** and do not publish sensitive details in a public issue.
+
+Please follow the **[Code of Conduct](CODE_OF_CONDUCT.md)** when participating.
+
+## Why this project stays focused
+
+The goal is to provide a clean digital-menu foundation, not to become a payment processor, delivery marketplace, POS platform, or proprietary SaaS product. Keeping the core small makes it easier to understand, extend, test, and deploy.
 
 ## Author
 
-**Aya Aljaidi** — Laravel / Full-Stack Developer, Tripoli, Libya  
+Maintained by **Aya Aljaidi** — Laravel / Full-Stack Developer, Tripoli, Libya.
+
 GitHub: [@ayagaidi](https://github.com/ayagaidi)
 
 ## License
 
-MIT
+Laravel Digital Menu is open source software licensed under the **[MIT License](LICENSE)**.
+
+If this project is useful to you, consider giving it a ⭐ — it helps more developers discover the project.
