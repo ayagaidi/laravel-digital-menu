@@ -1,0 +1,6 @@
+@extends('layouts.app')
+@section('title', ($locale==='ar' ? $branch->name_ar : $branch->name_en).' Menu')
+@section('content')
+<div class="container py-5"><div class="d-flex justify-content-between align-items-center mb-4"><div><a href="{{ route('home') }}" class="text-decoration-none">← {{ $locale==='ar' ? 'الفروع' : 'Branches' }}</a><h1 class="mt-2">{{ $locale==='ar' ? $branch->name_ar : $branch->name_en }}</h1></div><a class="btn btn-outline-dark" href="{{ route('menu.qr',[$restaurant,$branch]) }}">QR Code</a></div>
+@foreach($groups as $group)<section class="mb-5"><h2 class="h4 mb-3">{{ $locale==='ar' ? $group['category']->name_ar : $group['category']->name_en }}</h2><div class="row g-4">@foreach($group['items'] as $item)<div class="col-md-6 col-lg-4"><div class="card border-0 shadow-sm menu-card"><div class="card-body"><h3 class="h5">{{ $locale==='ar' ? $item->name_ar : $item->name_en }}</h3><p class="text-secondary small">{{ $locale==='ar' ? $item->description_ar : $item->description_en }}</p><div class="price">{{ number_format($item->pivot->price_override ?? $item->price,2) }} LYD</div></div></div></div>@endforeach</div></section>@endforeach
+</div>@endsection

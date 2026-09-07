@@ -1,0 +1,3 @@
+<?php
+use Illuminate\Database\Migrations\Migration;use Illuminate\Database\Schema\Blueprint;use Illuminate\Support\Facades\Schema;
+return new class extends Migration{public function up():void{Schema::create('restaurants',function(Blueprint $t){$t->id();$t->string('name_ar');$t->string('name_en');$t->string('slug')->unique();$t->text('description_ar')->nullable();$t->text('description_en')->nullable();$t->string('primary_color')->default('#0f766e');$t->string('secondary_color')->default('#134e4a');$t->string('default_locale')->default('en');$t->boolean('is_active')->default(true);$t->timestamps();});}public function down():void{Schema::dropIfExists('restaurants');}};

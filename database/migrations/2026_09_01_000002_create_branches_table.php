@@ -1,0 +1,3 @@
+<?php
+use Illuminate\Database\Migrations\Migration;use Illuminate\Database\Schema\Blueprint;use Illuminate\Support\Facades\Schema;
+return new class extends Migration{public function up():void{Schema::create('branches',function(Blueprint $t){$t->id();$t->foreignId('restaurant_id')->constrained()->cascadeOnDelete();$t->string('name_ar');$t->string('name_en');$t->string('slug');$t->string('address_ar')->nullable();$t->string('address_en')->nullable();$t->string('phone')->nullable();$t->boolean('is_active')->default(true);$t->unsignedInteger('sort_order')->default(0);$t->timestamps();$t->unique(['restaurant_id','slug']);});}public function down():void{Schema::dropIfExists('branches');}};

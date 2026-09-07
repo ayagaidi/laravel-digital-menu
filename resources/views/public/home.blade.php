@@ -1,0 +1,6 @@
+@extends('layouts.app')
+@section('title', $restaurant->name_en)
+@section('content')
+<section class="hero py-5"><div class="container py-4"><span class="badge text-bg-light mb-3">Open Source Demo</span><h1 class="display-5 fw-bold">{{ $locale==='ar' ? $restaurant->name_ar : $restaurant->name_en }}</h1><p class="lead mb-0">{{ $locale==='ar' ? $restaurant->description_ar : $restaurant->description_en }}</p></div></section>
+<div class="container py-5"><h2 class="h4 mb-4">{{ $locale==='ar' ? 'اختر الفرع' : 'Choose a branch' }}</h2><div class="row g-4">@foreach($branches as $branch)<div class="col-md-6"><div class="card shadow-sm border-0"><div class="card-body p-4"><h3 class="h5">{{ $locale==='ar' ? $branch->name_ar : $branch->name_en }}</h3><p class="text-secondary">{{ $locale==='ar' ? $branch->address_ar : $branch->address_en }}</p><a class="btn btn-dark" href="{{ route('menu.branch',[$restaurant,$branch]) }}">{{ $locale==='ar' ? 'فتح القائمة' : 'Open menu' }}</a> <a class="btn btn-outline-secondary" href="{{ route('menu.qr',[$restaurant,$branch]) }}">QR</a></div></div></div>@endforeach</div></div>
+@endsection

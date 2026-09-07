@@ -1,0 +1,2 @@
+@extends('layouts.app')
+@section('content')<div class="container py-5"><div class="alert alert-warning"><h1 class="h4">{{ $locale==='ar' ? 'هذا الفرع غير متاح حالياً' : 'This branch is currently unavailable' }}</h1></div></div>@endsection
