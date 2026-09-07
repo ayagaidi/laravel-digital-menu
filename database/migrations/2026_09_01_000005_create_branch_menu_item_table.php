@@ -1,3 +1,26 @@
 <?php
-use Illuminate\Database\Migrations\Migration;use Illuminate\Database\Schema\Blueprint;use Illuminate\Support\Facades\Schema;
-return new class extends Migration{public function up():void{Schema::create('branch_menu_item',function(Blueprint $t){$t->id();$t->foreignId('branch_id')->constrained()->cascadeOnDelete();$t->foreignId('menu_item_id')->constrained()->cascadeOnDelete();$t->boolean('is_available')->default(true);$t->decimal('price_override',10,2)->nullable();$t->timestamps();$t->unique(['branch_id','menu_item_id']);});}public function down():void{Schema::dropIfExists('branch_menu_item');}};
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('branch_menu_item', function (Blueprint $t) {
+            $t->id();
+            $t->foreignId('branch_id')->constrained()->cascadeOnDelete();
+            $t->foreignId('menu_item_id')->constrained()->cascadeOnDelete();
+            $t->boolean('is_available')->default(true);
+            $t->decimal('price_override', 10, 2)->nullable();
+            $t->timestamps();
+            $t->unique(['branch_id', 'menu_item_id']);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('branch_menu_item');
+    }
+};
