@@ -1,0 +1,35 @@
+name: Publish v1.0.0
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - docs/releases/v1.0.0.md
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: v1.0.0
+        run: |
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "$TAG already exists; nothing to publish."
+            exit 0
+          fi
+
+          gh release create "$TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Laravel Digital Menu v1.0.0" \
+            --notes-file docs/releases/v1.0.0.md
