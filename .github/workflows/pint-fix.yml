@@ -1,0 +1,32 @@
+name: Apply Laravel Pint
+
+on:
+  push:
+    branches: [chore/format-code]
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/format-code
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: mbstring, sqlite3, pdo_sqlite, dom, xml, xmlwriter
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Apply Pint and lock dependencies
+        run: |
+          vendor/bin/pint
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/pint-fix.yml
+          git add -A
+          git commit -m "style: apply Laravel Pint and lock dependencies" || exit 0
+          git push origin chore/format-code
