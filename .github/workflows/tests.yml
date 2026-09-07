@@ -21,5 +21,7 @@ jobs:
           extensions: mbstring, sqlite3, pdo_sqlite, dom, xml, xmlwriter
           coverage: none
       - run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Prepare test environment
+        run: cp .env.example .env
       - run: php artisan test
       - run: vendor/bin/pint --test
