@@ -1,28 +1,45 @@
+<p align="center">
+  <img src="docs/assets/hero.svg" alt="Laravel Digital Menu" width="100%">
+</p>
+
+<p align="center">
+  <a href="README.md">English</a> ·
+  <a href="docs/ARCHITECTURE.md">Architecture</a> ·
+  <a href="docs/ROADMAP.md">Roadmap</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a> ·
+  <a href="SECURITY.md">Security</a>
+</p>
+
 # Laravel Digital Menu
 
-مشروع مفتوح المصدر لبناء **منيو رقمي للمقاهي والمطاعم** باستخدام Laravel 12، من تطوير **Aya Aljaidi**.
+مشروع مفتوح المصدر لبناء **منيو رقمي ثنائي اللغة ومتعدد الفروع للمقاهي والمطاعم** باستخدام Laravel 12.
 
-> المشروع مستقل ومخصص للعرض والتعليم والمساهمة المفتوحة، ولا يحتوي على بيانات عميل أو كلمات مرور أو صور أو Branding خاص بأي مشروع تجاري.
+المشروع يوفر أساسًا عمليًا لمنيو QR مع محتوى عربي وإنجليزي، دعم RTL/LTR، إدارة الفروع والأقسام والمنتجات، والتحكم في توفر العناصر حسب الفرع.
+
+> المستودع مستقل بالكامل ولا يحتوي على بيانات عميل، كلمات مرور، Branding خاص، صور تجارية خاصة، أو بيانات Production.
 
 ## المميزات
 
-- Laravel 12 وPHP 8.2+
-- عربي وإنجليزي ودعم RTL/LTR
-- أكثر من فرع
-- التحكم في توفر المنتج حسب الفرع
-- دعم سعر مختلف حسب الفرع في تصميم قاعدة البيانات
-- أقسام ومنتجات
-- QR لكل فرع
-- تسجيل دخول للوحة الإدارة
-- CRUD للفروع والأقسام والمنتجات
-- بيانات Demo عامة وآمنة
-- Feature Tests باستخدام PHPUnit
-- GitHub Actions CI
-- ترخيص MIT
+| الجزء | المتوفر |
+| --- | --- |
+| Framework | Laravel 12 / PHP 8.2+ |
+| اللغات | عربي + إنجليزي |
+| الاتجاه | RTL + LTR |
+| الفروع | دعم عدة فروع |
+| المنيو | أقسام + منتجات |
+| قواعد الفرع | التوفر + دعم سعر مختلف حسب الفرع |
+| QR | Route خاص بكل فرع |
+| لوحة الإدارة | Authentication + CRUD |
+| التطوير المحلي | إعداد سهل باستخدام SQLite |
+| الجودة | PHPUnit Feature Tests + Laravel Pint |
+| CI | GitHub Actions |
+| الترخيص | MIT |
 
-## التشغيل
+## التشغيل السريع
 
 ```bash
+git clone https://github.com/ayagaidi/laravel-digital-menu.git
+cd laravel-digital-menu
 composer install
 cp .env.example .env
 php artisan key:generate
@@ -31,7 +48,15 @@ php artisan migrate --seed
 php artisan serve
 ```
 
-لإنشاء مستخدم Admin تجريبي ضعي القيم في `.env` محلياً فقط:
+بعدها افتحي:
+
+```text
+http://127.0.0.1:8000
+```
+
+## مستخدم Admin تجريبي
+
+المشروع لا يحتوي على Password ثابت داخل الكود. لإنشاء Admin محلي، ضعي القيم في `.env` عندك فقط:
 
 ```dotenv
 SEED_ADMIN_NAME="Demo Admin"
@@ -39,23 +64,62 @@ SEED_ADMIN_EMAIL=admin@example.test
 SEED_ADMIN_PASSWORD=change-this-locally
 ```
 
-ثم:
+ثم شغلي:
 
 ```bash
 php artisan db:seed
 ```
 
-## الاختبارات
+## الاختبارات والجودة
 
 ```bash
 php artisan test
+vendor/bin/pint --test
 ```
 
-## الهدف
+GitHub Actions يشغل الاختبارات وفحص Laravel Pint تلقائيًا على الـpush والـpull requests إلى `main`.
 
-المشروع Portfolio + Open Source Starter يوضح بناء Laravel حقيقي فيه علاقات Eloquent، Route Model Binding، Authentication، Localization، Pivot business logic، Migrations، Seeders، Tests وCI.
+الاختبارات الحالية تغطي عرض المنيو، تغيير اللغة، تسجيل دخول الإدارة، رفض المستخدم المعطل، توفر العناصر حسب الفرع، وسلوك الفروع غير النشطة.
+
+## تصميم البيانات
+
+```text
+Restaurant
+ └── Branch
+      ├── Category
+      │    └── MenuItem
+      └── branch_menu_item
+           ├── is_available
+           └── price_override
+```
+
+استخدام `branch_menu_item` يسمح بإعادة استخدام نفس المنتج في أكثر من فرع مع اختلاف التوفر أو السعر بدون تكرار بيانات المنتج الأساسية.
+
+## حالة المشروع
+
+الأساس الحالي يشمل الـdomain model، لوحة الإدارة، المنيو العام ثنائي اللغة، قواعد الفروع، الاختبارات والـCI.
+
+الخطوات القادمة تشمل رفع الصور بشكل آمن، إعدادات الـbranding، الصلاحيات، تعديل الأسعار حسب الفرع من لوحة الإدارة، وزيادة التغطية بالاختبارات.
+
+راجعي **[Roadmap](docs/ROADMAP.md)** و **[Changelog](CHANGELOG.md)** للتفاصيل.
+
+## المساهمة
+
+المساهمات مرحب بها طالما تحافظ على المشروع بسيطًا وآمنًا وقابلًا لإعادة الاستخدام.
+
+- للمشاكل القابلة للتكرار استخدمي Bug Report.
+- للأفكار الجديدة استخدمي Feature Request.
+- قبل إرسال كود راجعي **[CONTRIBUTING.md](CONTRIBUTING.md)**.
+- للمساعدة راجعي **[SUPPORT.md](SUPPORT.md)**.
+- للثغرات الأمنية راجعي **[SECURITY.md](SECURITY.md)** ولا تنشري أي معلومات حساسة في Issue عام.
 
 ## المطورة
 
 **Aya Aljaidi** — Laravel / Full-Stack Developer — Tripoli, Libya  
 GitHub: [@ayagaidi](https://github.com/ayagaidi)
+
+## الترخيص
+
+المشروع متاح تحت ترخيص **[MIT](LICENSE)**.
+
+إذا كان المشروع مفيدًا لك، ⭐ على GitHub تساعد مطورين أكثر على اكتشافه.
